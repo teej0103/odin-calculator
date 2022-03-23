@@ -1,6 +1,11 @@
+function captureDigit() {
+    console.log(`digit: ${this.value}`);
+    return this.value;
+}
+
 // function stores the operator thats pressed on the calculator
 function getOperator() {
-    operator = this.id;
+    operator = this.value;
     console.log(`operator: ${operator}`);
 }
 
@@ -10,7 +15,7 @@ let display = document.querySelector('.display');
 // query selector and click event for all digits 0-9
 let digits = Array.from(document.querySelectorAll('.digit'));
 digits.map(digit => {
-    digit.addEventListener('click', () => console.log('DIGITS'));
+    digit.addEventListener('click', captureDigit);
 })
 
 // query selector and event for all operators " / + - * "
@@ -27,3 +32,5 @@ equalsButton.addEventListener('click', () => console.log("EQUALS!!!"))
 let num1 = '';
 let num2 = '';
 let operator = '';
+
+// calculate on 2nd digit
