@@ -18,9 +18,9 @@ function divide(x, y) {
 // function stores the operator thats pressed on the calculator
 function getOperator() {
 
-    // if both numbers have been entered and an operator has been picked,
-    // perform caculation. This will be skipped on the first iteration of the calculator
-    if(num1 !== '' && num2 !== '' && operator !== '') {
+    // if both numbers have been entered, perform caculation. This 
+    // will be skipped on the first iteration of the calculator
+    if(num1 !== '' && num2 !== '') {
         // call calculate function
         calculate();
     }
@@ -50,6 +50,30 @@ function buildNumber() {
     }
 }
 
+// adds a decimal point to either number creating a float to be operated on
+function makeFloat() {
+    // add to first number if operator isnt picked
+    if(isOperatorChosen === false) {
+        // check if there is already a decimal point in the number already
+        if(!num1.includes('.')) {
+            // add decimal
+            num1 += '.';
+            // display number
+            display.innerText = num1;
+        }
+    }
+    // add to second number
+    else {
+        // check for existing decimal point
+        if(!num2.includes('.')) {
+            // add decimal
+            num2 += '.';
+            // display number
+            display.innerText = num2;
+        }
+    }
+}
+
 // calculate function for performing operations
 function calculate() {
     if(operator === '+') {
@@ -72,7 +96,16 @@ function calculate() {
         display.innerText = num1;
         num2 = ''   
     }
+}
 
+// TEST FUNCTION (supposed to check which combo of numbers/operators are full and calculate accordingly)
+function howToOperate() {
+    if(num1 !== '' && num2 !== '') {
+        calculate();
+    }
+    else{
+        return;
+    }
     console.log(`num1: ${num1}\noperator: ${operator}\nnum2: ${num2}`);
 }
 
@@ -100,9 +133,13 @@ operators.map(operator => {
     operator.addEventListener('click', getOperator);
 })
 
+// query selector and event listener for decimal button to make number a float
+let decimalButton = document.querySelector('#decimal');
+decimalButton.addEventListener('click', makeFloat);
+
 // query selector and event for equals button
 let equalsButton = document.querySelector('.equals');
-equalsButton.addEventListener('click', calculate)
+equalsButton.addEventListener('click', howToOperate)
 
 let clearButton = document.querySelector('#clear');
 clearButton.addEventListener('click', clearAndReset);
