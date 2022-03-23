@@ -18,22 +18,34 @@ function divide(x, y) {
 // function stores the operator thats pressed on the calculator
 function getOperator() {
 
+    // if both numbers have been entered and an operator has been picked,
+    // perform caculation. This will be skipped on the first iteration of the calculator
     if(num1 !== '' && num2 !== '' && operator !== '') {
+        // call calculate function
         calculate();
     }
+    // store operator thats pressed on calculator
     operator = this.value;
 
+    // set to true to determine which number to build
     isOperatorChosen = true;
 
 }
 
+// builds number based on if an oerator has been picked or not,
+// Will only build num1 on first iteration. After that num1 is used for the result
+// of an operation
 function buildNumber() {
     if(isOperatorChosen === false) {
+        // add the digit to the num1 variable
         num1 += this.value;
+        // display new num1 to the display on calculator
         display.innerText = num1;
     }
     else {
+        // add digit to num2
         num2 += this.value;
+        // display new num2 to display on calculator
         display.innerText = num2;
     }
 }
@@ -98,3 +110,6 @@ let num1 = '';
 let num2 = '';
 let operator = '';
 let isOperatorChosen = false;
+
+
+// take care of long numbers and overflow
