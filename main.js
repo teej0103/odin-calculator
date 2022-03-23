@@ -1,3 +1,9 @@
+// function stores the operator thats pressed on the calculator
+function getOperator() {
+    operator = this.id;
+    console.log(`operator: ${operator}`);
+}
+
 // query selector for display window
 let display = document.querySelector('.display');
 
@@ -10,7 +16,7 @@ digits.map(digit => {
 // query selector and event for all operators " / + - * "
 let operators = Array.from(document.querySelectorAll('.operator'));
 operators.map(operator => {
-    operator.addEventListener('click', () => console.log('OPERATORS'));
+    operator.addEventListener('click', getOperator);
 })
 
 // query selector and event for equals button
