@@ -1,8 +1,3 @@
-let num1 = '';
-let num2 = '';
-let operator = '';
-let isOperatorChosen = false;
-
 // all four operation functions
 function add(x, y) {
     return parseFloat(x) + parseFloat(y);
@@ -24,7 +19,7 @@ function divide(x, y) {
 function getOperator() {
 
     if(num1 !== '' && num2 !== '' && operator !== '') {
-        equalsCalculate();
+        calculate();
     }
     operator = this.value;
 
@@ -42,10 +37,9 @@ function buildNumber() {
         display.innerText = num2;
     }
 }
-// DONT THINK I NEED THIS YET BUT HANGING ONTO IT
-/*
-// calculate function for when equals button is not pressed and the useer strings operations
-function stringCalculate() {
+
+// calculate function for when the equals button is used to perform operations
+function calculate() {
     if(operator === '+') {
         num1 = add(num1, num2).toString();
         display.innerText = num1;
@@ -69,32 +63,13 @@ function stringCalculate() {
 
     console.log(`num1: ${num1}\noperator: ${operator}\nnum2: ${num2}`);
 }
-*/
 
-// calculate function for when the equals button is used to perform operations
-function equalsCalculate() {
-    if(operator === '+') {
-        num1 = add(num1, num2).toString();
-        display.innerText = num1;
-        num2 = ''    
-    }
-    else if(operator === '-') {
-        num1 = subtract(num1, num2).toString();
-        display.innerText = num1;
-        num2 = ''   
-    }
-    else if(operator === '*') {
-        num1 = multiply(num1, num2).toString();
-        display.innerText = num1;
-        num2 = ''   
-    }
-    else if(operator === '/') {
-        num1 = divide(num1, num2).toString();
-        display.innerText = num1;
-        num2 = ''   
-    }
-
-    console.log(`num1: ${num1}\noperator: ${operator}\nnum2: ${num2}`);
+function clearAndReset() {
+    num1 = '';
+    num2 = '';
+    operator = '';
+    isOperatorChosen = false;
+    display.innerText = '0';
 }
 
 // query selector for display window
@@ -114,4 +89,12 @@ operators.map(operator => {
 
 // query selector and event for equals button
 let equalsButton = document.querySelector('.equals');
-equalsButton.addEventListener('click', equalsCalculate)
+equalsButton.addEventListener('click', calculate)
+
+let clearButton = document.querySelector('#clear');
+clearButton.addEventListener('click', clearAndReset);
+
+let num1 = '';
+let num2 = '';
+let operator = '';
+let isOperatorChosen = false;
