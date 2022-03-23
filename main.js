@@ -50,7 +50,7 @@ function buildNumber() {
     }
 }
 
-// calculate function for when the equals button is used to perform operations
+// calculate function for performing operations
 function calculate() {
     if(operator === '+') {
         num1 = add(num1, num2).toString();
@@ -76,6 +76,7 @@ function calculate() {
     console.log(`num1: ${num1}\noperator: ${operator}\nnum2: ${num2}`);
 }
 
+// resets all variables back to their default values and shows '0' on display
 function clearAndReset() {
     num1 = '';
     num2 = '';
