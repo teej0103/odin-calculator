@@ -1,11 +1,35 @@
+let num1 = '';
+let num2 = '';
+let operator = '';
+let isOperatorChosen = false;
+
+// all four operation functions
+function add(x, y) {
+    return parseFloat(x) + parseFloat(y);
+}
+
+function subtract(x, y) {
+    return parseFloat(x) - parseFloat(y);
+}
+
+function multiply(x, y) {
+    return parseFloat(x) * parseFloat(y);
+}
+
+function divide(x, y) {
+    return parseFloat(x) / parseFloat(y);
+}
+
 // function stores the operator thats pressed on the calculator
 function getOperator() {
+
+    if(num1 !== '' && num2 !== '' && operator !== '') {
+        equalsCalculate();
+    }
     operator = this.value;
 
     isOperatorChosen = true;
-    if(num1 !== '' && num2 !== '' && operator !== '') {
-        stringCalculate();
-    }
+
 }
 
 function buildNumber() {
@@ -18,20 +42,58 @@ function buildNumber() {
         display.innerText = num2;
     }
 }
-
+// DONT THINK I NEED THIS YET BUT HANGING ONTO IT
+/*
 // calculate function for when equals button is not pressed and the useer strings operations
 function stringCalculate() {
-    num1 = (parseFloat(num1) + parseFloat(num2)).toString();
-    display.innerText = num1;
-    num2 = ''
+    if(operator === '+') {
+        num1 = add(num1, num2).toString();
+        display.innerText = num1;
+        num2 = ''    
+    }
+    else if(operator === '-') {
+        num1 = subtract(num1, num2).toString();
+        display.innerText = num1;
+        num2 = ''   
+    }
+    else if(operator === '*') {
+        num1 = multiply(num1, num2).toString();
+        display.innerText = num1;
+        num2 = ''   
+    }
+    else if(operator === '/') {
+        num1 = divide(num1, num2).toString();
+        display.innerText = num1;
+        num2 = ''   
+    }
+
     console.log(`num1: ${num1}\noperator: ${operator}\nnum2: ${num2}`);
 }
+*/
 
 // calculate function for when the equals button is used to perform operations
 function equalsCalculate() {
-    num1 = (parseFloat(num1) + parseFloat(num2)).toString();
-    display.innerText = num1;
-    num2 = '';
+    if(operator === '+') {
+        num1 = add(num1, num2).toString();
+        display.innerText = num1;
+        num2 = ''    
+    }
+    else if(operator === '-') {
+        num1 = subtract(num1, num2).toString();
+        display.innerText = num1;
+        num2 = ''   
+    }
+    else if(operator === '*') {
+        num1 = multiply(num1, num2).toString();
+        display.innerText = num1;
+        num2 = ''   
+    }
+    else if(operator === '/') {
+        num1 = divide(num1, num2).toString();
+        display.innerText = num1;
+        num2 = ''   
+    }
+
     console.log(`num1: ${num1}\noperator: ${operator}\nnum2: ${num2}`);
 }
 
@@ -53,10 +115,3 @@ operators.map(operator => {
 // query selector and event for equals button
 let equalsButton = document.querySelector('.equals');
 equalsButton.addEventListener('click', equalsCalculate)
-
-
-let num1 = '';
-let num2 = '';
-let operator = '';
-let isOperatorChosen = false;
-
