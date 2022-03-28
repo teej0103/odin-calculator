@@ -1,5 +1,9 @@
 // all four operation functions
 function add(x, y) {
+    let sum = parseFloat(x) + parseFloat(y);
+    if(sum.toString.length > 11) {
+        return sum.toFixed(11);
+    }
     return parseFloat(x) + parseFloat(y);
 }
 
@@ -8,6 +12,10 @@ function subtract(x, y) {
 }
 
 function multiply(x, y) {
+    let result = parseFloat(x) * parseFloat(y);
+    if(result > 99999999999) {
+        return result.toExponential();
+    }
     return parseFloat(x) * parseFloat(y);
 }
 
@@ -43,13 +51,13 @@ function getOperator() {
 // Will only build num1 on first iteration. After that num1 is used for the result
 // of an operation
 function buildNumber() {
-    if(isOperatorChosen === false && num1.length < 10) {
+    if(isOperatorChosen === false && num1.length < 9) {
         // add the digit to the num1 variable
         num1 += this.value;
         // display new num1 to the display on calculator
         display.innerText = num1;
     }
-    else if(isOperatorChosen === true && num2.length < 10) {
+    else if(isOperatorChosen === true && num2.length < 9) {
         // add digit to num2
         num2 += this.value;
         // display new num2 to display on calculator
@@ -120,25 +128,22 @@ function chooseOperation() {
     }
 }
 
-// TEST FUNCTION (supposed to check which combo of numbers/operators are full and calculate accordingly)
+// calculates operation depending on order and what numbers are available. Should have apple-calculator like functionality
 function calculate() {
     if(num1 !== '' && num2 === '') {
         num2 = num1;
         chooseOperation();
         isEquals = true;
-        console.log(`num1: ${num1}\noperator: ${operator}\nnum2: ${num2}`);
         return;
     }
     else if(num1 === '' && num2 !== '') {
         num1 = '0';
         chooseOperation();
-        console.log(`num1: ${num1}\noperator: ${operator}\nnum2: ${num2}`);
         return;
     }
     else {
         chooseOperation();
         isEquals = true;
-        console.log(`num1: ${num1}\noperator: ${operator}\nnum2: ${num2}`);
         return;
     }
 }
@@ -187,6 +192,3 @@ let num2 = '';
 let operator = '';
 let isEquals = false;
 let isOperatorChosen = false;
-
-
-// take care of long numbers and overflow
