@@ -18,17 +18,24 @@ function divide(x, y) {
 // function stores the operator thats pressed on the calculator
 function getOperator() {
 
+    if(isEquals === true) {
+        num2 = '';
+        operator = '';
+    }
     // if both numbers have been entered, perform caculation. This 
     // will be skipped on the first iteration of the calculator
     if(num1 !== '' && num2 !== '') {
         // call calculate function
-        calculate();
+        chooseOperation();
+        console.log(`num1: ${num1}\noperator: ${operator}\nnum2: ${num2}`);
+        num2 = '';
     }
     // store operator thats pressed on calculator
     operator = this.value;
 
     // set to true to determine which number to build
     isOperatorChosen = true;
+    isEquals = false;
 
 }
 
@@ -36,13 +43,13 @@ function getOperator() {
 // Will only build num1 on first iteration. After that num1 is used for the result
 // of an operation
 function buildNumber() {
-    if(isOperatorChosen === false) {
+    if(isOperatorChosen === false && num1.length < 10) {
         // add the digit to the num1 variable
         num1 += this.value;
         // display new num1 to the display on calculator
         display.innerText = num1;
     }
-    else {
+    else if(isOperatorChosen === true && num2.length < 10) {
         // add digit to num2
         num2 += this.value;
         // display new num2 to display on calculator
@@ -75,38 +82,53 @@ function makeFloat() {
 }
 
 // calculate function for performing operations
-function calculate() {
+function chooseOperation() {
     if(operator === '+') {
         num1 = add(num1, num2).toString();
         display.innerText = num1;
-        num2 = ''    
     }
     else if(operator === '-') {
         num1 = subtract(num1, num2).toString();
         display.innerText = num1;
-        num2 = ''   
     }
     else if(operator === '*') {
         num1 = multiply(num1, num2).toString();
         display.innerText = num1;
-        num2 = ''   
     }
     else if(operator === '/') {
+        if(num2 === '0') {
+            display.innerText = '=/ Error';
+            setTimeout(() => {
+                clearAndReset();
+            }, 2000)
+            return;
+        }
         num1 = divide(num1, num2).toString();
         display.innerText = num1;
-        num2 = ''   
     }
 }
 
 // TEST FUNCTION (supposed to check which combo of numbers/operators are full and calculate accordingly)
-function howToOperate() {
-    if(num1 !== '' && num2 !== '') {
-        calculate();
-    }
-    else{
+function calculate() {
+    if(num1 !== '' && num2 === '') {
+        num2 = num1;
+        chooseOperation();
+        isEquals = true;
+        console.log(`num1: ${num1}\noperator: ${operator}\nnum2: ${num2}`);
         return;
     }
-    console.log(`num1: ${num1}\noperator: ${operator}\nnum2: ${num2}`);
+    else if(num1 === '' && num2 !== '') {
+        num1 = '0';
+        chooseOperation();
+        console.log(`num1: ${num1}\noperator: ${operator}\nnum2: ${num2}`);
+        return;
+    }
+    else {
+        chooseOperation();
+        isEquals = true;
+        console.log(`num1: ${num1}\noperator: ${operator}\nnum2: ${num2}`);
+        return;
+    }
 }
 
 // resets all variables back to their default values and shows '0' on display
@@ -115,6 +137,7 @@ function clearAndReset() {
     num2 = '';
     operator = '';
     isOperatorChosen = false;
+    isEquals = false;
     display.innerText = '0';
 }
 
@@ -139,7 +162,7 @@ decimalButton.addEventListener('click', makeFloat);
 
 // query selector and event for equals button
 let equalsButton = document.querySelector('.equals');
-equalsButton.addEventListener('click', howToOperate)
+equalsButton.addEventListener('click', calculate)
 
 let clearButton = document.querySelector('#clear');
 clearButton.addEventListener('click', clearAndReset);
@@ -147,6 +170,7 @@ clearButton.addEventListener('click', clearAndReset);
 let num1 = '';
 let num2 = '';
 let operator = '';
+let isEquals = false;
 let isOperatorChosen = false;
 
 
