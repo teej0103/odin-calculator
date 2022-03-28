@@ -81,6 +81,18 @@ function makeFloat() {
     }
 }
 
+// function for the back button 
+function goBack() {
+    if(isOperatorChosen === false) {
+        num1 = num1.slice(0, -1);
+        display.innerText = num1;
+    }
+    else if(isOperatorChosen === true) {
+        num2 = num2.slice(0, -1);
+        display.innerText = num2; 
+    }
+}
+
 // calculate function for performing operations
 function chooseOperation() {
     if(operator === '+') {
@@ -166,6 +178,9 @@ equalsButton.addEventListener('click', calculate)
 
 let clearButton = document.querySelector('#clear');
 clearButton.addEventListener('click', clearAndReset);
+
+let backButton = document.querySelector('.back');
+backButton.addEventListener('click', goBack);
 
 let num1 = '';
 let num2 = '';

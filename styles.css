@@ -9,5 +9,72 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #efefef;
+    font-family: Coda;
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: auto;
+    width: auto;
+    background-color: #000;
+    border-radius: 4px;
+    padding: .75rem;
+}
+
+.display {
+    display: flex;
+    height: 60px;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 5px;
+    background-color: #464646;
+    color: #f7f8f6;
+    font-size: 2rem;
+    border-radius: 4px;
+}
+
+.row {
+    display: flex;
+    gap: 8px;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    padding: 25px;
+    font-family: Coda;
+    font-size: 1.25rem;
+    transition: 2;
+}
+
+button:hover {
+    background-color: #464646;
+    transition: 0.3s ease-out;
+    color: #f7f8f6;
+}
+
+.operator:hover,
+.equals:hover {
+    background-color: #464646;
+    transition: 0.3s ease-out;
+    color: #e7f36a;   
+}
+
+.operator,
+.equals {
+    background-color: #e7f36a;
+}
+
+#clear,
+#zero {
+    flex-grow: 2;
+    border-radius: 30px;
+}
