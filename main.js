@@ -1,26 +1,34 @@
 // all four operation functions
 function add(x, y) {
     let sum = parseFloat(x) + parseFloat(y);
-    if(sum.toString.length > 11) {
-        return sum.toFixed(11);
+    if(sum > 999999999) {
+        return sum.toExponential(0);
     }
     return parseFloat(x) + parseFloat(y);
 }
 
 function subtract(x, y) {
-    return parseFloat(x) - parseFloat(y);
+    let result = parseFloat(x) - parseFloat(y);
+    if(result < -999999999) {
+        return result.toExponential(0);
+    }
+    return result;
 }
 
 function multiply(x, y) {
     let result = parseFloat(x) * parseFloat(y);
     if(result > 99999999999) {
-        return result.toExponential();
+        return result.toExponential(0);
     }
     return parseFloat(x) * parseFloat(y);
 }
 
 function divide(x, y) {
-    return parseFloat(x) / parseFloat(y);
+    let quotient = parseFloat(x) / parseFloat(y);
+    if(quotient.toString().length > 9) {
+        return quotient.toExponential(0);
+    }
+    return quotient;
 }
 
 // function stores the operator thats pressed on the calculator
@@ -35,7 +43,6 @@ function getOperator() {
     if(num1 !== '' && num2 !== '') {
         // call calculate function
         chooseOperation();
-        console.log(`num1: ${num1}\noperator: ${operator}\nnum2: ${num2}`);
         num2 = '';
     }
     // store operator thats pressed on calculator
